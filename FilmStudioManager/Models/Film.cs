@@ -5,7 +5,7 @@ using FilmStudioManager.Models;
 public class Film
 {
     [Key]
-    public int IDFilm;
+    public int FilmId { get; set; }
 
     [Required]
     public required string FilmName { get; set; }

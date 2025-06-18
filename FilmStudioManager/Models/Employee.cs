@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 public class Employee
 {
     [Key]
-    public int IDEmployee { get; set; }
+    public int EmployeeId { get; set; }
 
     [Required]
     public required string FirstName { get; set; }

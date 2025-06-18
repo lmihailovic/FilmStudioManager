@@ -34,7 +34,7 @@ using (var scope = app.Services.CreateScope())
     context.Database.Migrate();
     
     // Seed podataka ako je potrebno
-    await SeedData.Initialize(services);
+    //await SeedData.Initialize(services);
 }
 
 // Configure the HTTP request pipeline.
