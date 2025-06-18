@@ -5,6 +5,7 @@
 <h2>Login</h2>
 
 <form asp-action="Login" method="post">
+    @Html.AntiForgeryToken()
     <input type="hidden" name="returnUrl" value="@returnUrl" />
 
     <div class="form-group">
@@ -21,7 +22,7 @@
         <input name="rememberMe" id="rememberMe" type="checkbox" class="form-check-input" />
         <label for="rememberMe" class="form-check-label">Remember me</label>
     </div>
-
+    
     <button type="submit" class="btn btn-primary">Log in</button>
 </form>
 

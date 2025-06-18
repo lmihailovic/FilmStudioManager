@@ -62,6 +62,7 @@ public class AccountController : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Register(string email, string password, string confirmPassword, string? returnUrl = null)
     {
         ViewData["ReturnUrl"] = returnUrl;
