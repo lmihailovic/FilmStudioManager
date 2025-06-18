@@ -1,0 +1,16 @@
+services:
+  # MariaDB servis
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    environment:
+      MYSQL_ROOT_HOST: "%"            # bez ovoga DataGrip javlja gresku. Videti zvanicnu dokumentaciju za MYSQL_ROOT_HOST
+      MYSQL_ROOT_PASSWORD: root 
+      MYSQL_DATABASE: filmstudio
+      MYSQL_USER: korisnik
+      MYSQL_PASSWORD: cet.123$
+    ports:
+      - "3306:3306"
+    volumes:
+      - ~/.mariadb_data:/var/lib/mysql  # Trajni volumen za podatke
+    restart: unless-stopped
