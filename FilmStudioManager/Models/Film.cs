@@ -17,4 +17,5 @@ public class Film
 
     public List<Employee> Employees { get; } = [];
     public List<FilmEmployee> FilmEmployees { get; } = [];
+    public Genre Genre { get; set; }
 }
