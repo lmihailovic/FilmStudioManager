@@ -70,12 +70,12 @@ async Task CreateAdminRoleAndUserAsync(IServiceProvider serviceProvider)
 {
     var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-
     string roleName = "Admin";
 
         var roleExists = await roleManager.RoleExistsAsync(roleName);
         if (!roleExists)
         {
+            Console.WriteLine("🔥 Seeding role...");
             await roleManager.CreateAsync(new IdentityRole(roleName));
         }
 
@@ -85,18 +85,28 @@ async Task CreateAdminRoleAndUserAsync(IServiceProvider serviceProvider)
 
     if (adminUser == null)
     {
+        Console.WriteLine("🔥 Seeding admin user...");
         var admin = new ApplicationUser
         {
             UserName = adminEmail,
             Email = adminEmail
         };
 
-        string adminPassword = "admin";
+        string adminPassword = "Admin123!";
 
         var createAdmin = await userManager.CreateAsync(admin, adminPassword);
         if (createAdmin.Succeeded)
         {
+            Console.WriteLine("🔥 Succeeded");
+
             await userManager.AddToRoleAsync(admin, "Admin");
+        }
+        else
+        {
+            foreach (var error in createAdmin.Errors)
+            {
+                Console.WriteLine($"❌ Failed to create admin: {error.Description}");
+            }
         }
     }
 }
