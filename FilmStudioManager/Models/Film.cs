@@ -14,4 +14,7 @@ public class Film
     public int IDGenre { get; set; }
 
     public DateTime? DateOfRelease { get; set; }
+
+    public List<Employee> Employees { get; } = [];
+    public List<FilmEmployee> FilmEmployees { get; } = [];
 }

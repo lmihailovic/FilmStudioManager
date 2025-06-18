@@ -12,4 +12,7 @@ public class Employee
     public required string LastName { get; set; }
 
     public string? Role { get; set; }
+
+    public List<Film> Films { get; } = [];
+    public List<FilmEmployee> FilmEmployees { get; } = [];
 }
