@@ -1,0 +1,16 @@
+@{
+    ViewData["Title"] = "All Films";
+}
+
+<div class="header-row">Films</div>
+
+    <div class="elementDisplay">
+    @foreach(var film in Model)
+    {
+        <div class="element">
+            <div class="elementHeader">@film.FilmName</div>
+            <div class="elementData">@film.Genre.GenreName</div>
+            <div class="elementData">@film.DateOfRelease</div>
+        </div>
+    }
+    </div>
