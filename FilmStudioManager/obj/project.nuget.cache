@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "YpcaJj2Q1Eo=",
+  "success": true,
+  "projectFilePath": "/home/lule/Fakultet/6-semestar/RVAS/Ispit/FilmStudioManager/FilmStudioManager.csproj",
+  "expectedPackageFiles": [
+    "/home/lule/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.4/microsoft.aspnetcore.app.ref.9.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}
