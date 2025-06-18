@@ -2,6 +2,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using FilmStudioManager.Models;
 
+namespace FilmStudioManager.Models;
+
 public class Film
 {
     [Key]

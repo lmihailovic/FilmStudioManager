@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
+namespace FilmStudioManager.Models;
+
 public class Employee
 {
     [Key]

@@ -1,5 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
+namespace FilmStudioManager.Models;
+
+
 public class Genre
 {
     [Key]
