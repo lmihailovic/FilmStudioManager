@@ -6,24 +6,29 @@
     <h1 class="header-row">Films</h1>
     @if(User.Identity.IsAuthenticated)
     {
-        <a class="btn btn-primary ms-auto" asp-action="Create">Add Film</a>
+        <button class="aero primary ms-auto"><a asp-action="Create">Add Film</a></button>
     }
 </div>
 
     <div class="elementDisplay">
     @foreach(var film in Model)
     {
-        <div class="element">
+        <div class="element glass-card">
+            
+            <div class="glass-filter"></div>
+            <div class="glass-overlay"></div>
+            <div class="glass-specular"></div>
+
             <div class="elementHeader">@film.FilmName</div>
             <div class="elementData">@film.Genre.GenreName</div>
             <div class="elementData">@film.DateOfRelease</div>
             @if(User.Identity.IsAuthenticated)
             {
                 <div class="d-flex gap-1">
-                        <a class="btn btn-info" asp-controller="Film" asp-action="Edit" asp-route-id="@film.FilmId" >Edit</a>
+                        <button class="aero"><a asp-controller="Film" asp-action="Edit" asp-route-id="@film.FilmId" >Edit</a></button>
                         <form class="form-inline" asp-controller="Film" asp-action="Delete" asp-route-id="@film.FilmId" method="post">
                             @Html.AntiForgeryToken()
-                            <input class="btn btn-danger" type="submit" value="Delete">
+                            <button class="aero danger" type="submit">Delete</button>
                         </form>
                 </div>
             }

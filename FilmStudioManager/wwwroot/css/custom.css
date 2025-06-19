@@ -1,11 +1,27 @@
+:root
+{
+    --bottom-glow: radial-gradient(farthest-corner at bottom center,	rgba(255, 255, 255, 0.7),	transparent);
+    --lg-bg-color: rgba(255, 255, 255, 0.02);
+    --lg-highlight: rgba(255, 255, 255, 0.75);
+    --lg-text: #ffffff;
+}
+
+.bg
+{
+    background-image: url("/images/frutiger.png");
+    background-size: cover;
+}
+
 .elementDisplay
 {
     padding: 2em;
 
+    width: 100%;
+
     display: flex;
+    flex-wrap: wrap;
     gap: 2em;
     justify-content: center;
-    align-items: baseline;
 }
 
 .element
@@ -13,8 +29,106 @@
     padding: 1em;
     width: 30%;
     
-    outline: 1px solid black;
+    /* outline: 1px solid black; */
 
     display: flex;
     flex-direction: column;
+}
+
+.aero
+{
+    --hue: 245;
+    --button-background: oklch(75% 0.1 var(--hue) / 0.8);
+    --bg-dark: oklch(45% 0.1 var(--hue) / 0.75);
+    --button-foreground: oklch(15% 0.05 var(--hue));
+    background-color: var(--button-background);
+    background: var(--bottom-glow), linear-gradient(to bottom, var(--bg-dark), var(--button-background));
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--button-background);
+    border-radius: 9999px;
+    cursor: pointer;
+    padding: 1ex 1em;
+    position: relative;
+    text-shadow: 0 2px 0.5em #0003;
+    text-decoration: none;
+    transition: all 300ms;
+    color: var(--button-foreground);
+    font-family: "Lucida Grande", "Lucida Sans Unicode", "Lunasima", sans-serif;
+    font-weight: 700;
+}
+.aero::after
+{
+    content: "";
+    position: absolute;
+    top: 4%;
+    left: 0.5em;
+    width: calc(100% - 1em);
+    height: 40%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.1));
+    border-radius: 9999px;
+    transition: background 400ms;
+}
+.aero:hover, .aero:focus
+{
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+}
+.aero:active
+{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+.aero a
+{
+    text-decoration: none;
+    color: black;
+}
+
+.danger
+{
+    --hue: 0;
+}
+
+.primary
+{
+    --hue: 210;
+}
+
+.glass-card
+{
+    position: relative;
+    overflow: hidden;
+    border-radius: 1em;
+    box-shadow:
+        0 6px 12px rgba(0, 0, 0, 0.25),
+        0 0 40px rgba(255, 255, 255, 0.05);
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.glass-filter
+{
+    position: absolute;
+    inset: 0;
+    z-index: -3;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(10px);
+    filter: url(#liquid-lens);
+}
+
+.glass-overlay
+{
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background: var(--lg-bg-color);
+}
+
+.glass-specular
+{
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    box-shadow:
+        inset 1px 1px 0 var(--lg-highlight),
+        inset 0 0 5px var(--lg-highlight);
 }

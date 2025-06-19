@@ -4,7 +4,7 @@
 
 <div class="col-md-12 d-flex align-items-center">
     <h1 class="header-row">Genres</h1>
-    <a class="btn btn-primary ms-auto" asp-action="Create">Add Genre</a>
+    <a class="aero primary ms-auto" asp-action="Create">Add Genre</a>
 </div>
 
 <table class="table table-bordered mt-3 table-striped  ">
@@ -21,10 +21,10 @@
             <td>@genre.GenreName</td>
             <td class="text-nowrap">
                 <div class="d-flex gap-1">
-                    <a class="btn btn-info" asp-controller="Genre" asp-action="Edit" asp-route-id="@genre.GenreId" >Edit</a>
+                    <a class="aero" asp-controller="Genre" asp-action="Edit" asp-route-id="@genre.GenreId" >Edit</a>
                     <form class="form-inline" asp-controller="Genre" asp-action="Delete" asp-route-id="@genre.GenreId" method="post">
                         @Html.AntiForgeryToken()
-                        <input class="btn btn-danger" type="submit" value="Delete">
+                        <button type="submit" class="aero danger">Delete</button>
                     </form>
                 </div>
             </td>
