@@ -4,6 +4,7 @@ using FilmStudioManager.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 public class FilmController : Controller
 {
@@ -22,6 +23,7 @@ public class FilmController : Controller
         return View(films);
     }
 
+    [Authorize]
     public IActionResult Create()
     {
         ViewData["GenreId"] = new SelectList(_context.Genres, "GenreId", "GenreName");
@@ -29,6 +31,7 @@ public class FilmController : Controller
     }
 
     [HttpPost]
+    [Authorize]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Film film)
     {
@@ -38,8 +41,72 @@ public class FilmController : Controller
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        
+
         ViewData["GenreId"] = new SelectList(_context.Genres, "GenreId", "GenreName", film.GenreId);
         return View(film);
     }
+
+    [Authorize]
+    public async Task<IActionResult> Edit(int id)
+    {
+        var film = _context.Films.FirstOrDefault(f => f.FilmId == id);
+        if (film == null)
+            return NotFound();
+
+        ViewData["GenreId"] = new SelectList(_context.Genres, "GenreId", "GenreName", film.GenreId);
+        return View(film);
+    }
+
+    [HttpPost]
+    [Authorize]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, Film film)
+    {
+        if (id != film.FilmId)
+        {
+            return NotFound();
+        }
+
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                _context.Update(film);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.Films.Any(e => e.FilmId == film.FilmId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+        ViewData["GenreId"] = new SelectList(_context.Genres, "GenreId", "GenreName", film.GenreId);
+        return View(film);
+    }
+    
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    [Authorize]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var film = await _context.Films.FindAsync(id);
+        if (film == null)
+        {
+            return NotFound();
+        }
+
+        _context.Films.Remove(film);
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction(nameof(Index));
+    }
+
 }

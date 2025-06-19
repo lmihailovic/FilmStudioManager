@@ -2,7 +2,7 @@
     ViewData["Title"] = "All Films";
 }
 
-<div class="header-row">Films</div>
+<h1 class="header-row">Films</h1>
 
     <div class="elementDisplay">
     @foreach(var film in Model)
@@ -11,6 +11,16 @@
             <div class="elementHeader">@film.FilmName</div>
             <div class="elementData">@film.Genre.GenreName</div>
             <div class="elementData">@film.DateOfRelease</div>
+            @if(User.Identity.IsAuthenticated)
+            {
+                <div class="d-flex gap-1">
+                        <a class="btn btn-info" asp-controller="Film" asp-action="Edit" asp-route-id="@film.FilmId" >Edit</a>
+                        <form class="form-inline" asp-controller="Film" asp-action="Delete" asp-route-id="@film.FilmId" method="post">
+                            @Html.AntiForgeryToken()
+                            <input class="btn btn-danger" type="submit" value="Delete">
+                        </form>
+                </div>
+            }
         </div>
     }
 </div>
