@@ -2,7 +2,13 @@
     ViewData["Title"] = "All Films";
 }
 
-<h1 class="header-row">Films</h1>
+<div class="col-md-12 d-flex align-items-center">
+    <h1 class="header-row">Films</h1>
+    @if(User.Identity.IsAuthenticated)
+    {
+        <a class="btn btn-primary ms-auto" asp-action="Create">Add Film</a>
+    }
+</div>
 
     <div class="elementDisplay">
     @foreach(var film in Model)
