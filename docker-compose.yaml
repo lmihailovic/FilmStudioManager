@@ -1,5 +1,4 @@
 services:
-  # MariaDB servis
   mariadb:
     image: mariadb:latest
     container_name: mariadb
@@ -12,5 +11,5 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ~/.mariadb_data:/var/lib/mysql  # Trajni volumen za podatke
+      - ~/.mariadb_data:/var/lib/mysql
     restart: unless-stopped
