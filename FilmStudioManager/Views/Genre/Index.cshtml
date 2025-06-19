@@ -1,0 +1,34 @@
+@{
+    ViewData["Title"] = "All Genres";
+}
+
+<div class="col-md-12 d-flex">
+    <h1 class="header-row">Genres</h1>
+    <a class="btn btn-primary ms-auto align-middle" asp-action="Create">Add Genre</a>
+</div>
+
+<table class="table table-bordered mt-3 table-striped  ">
+    <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Options</th>
+    </thead>
+    <tbody>
+    @foreach(var genre in Model)
+    {
+        <tr>
+            <td>@genre.GenreId</td>
+            <td>@genre.GenreName</td>
+            <td class="text-nowrap">
+                <div class="d-flex gap-1">
+                    <a class="btn btn-info" asp-controller="Genre" asp-action="Edit" asp-route-id="@genre.GenreId" >Edit</a>
+                    <form class="form-inline" asp-controller="Genre" asp-action="Delete" asp-route-id="@genre.GenreId" method="post">
+                        @Html.AntiForgeryToken()
+                        <input class="btn btn-danger" type="submit" value="Delete">
+                    </form>
+                </div>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
