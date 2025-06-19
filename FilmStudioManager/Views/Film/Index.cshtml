@@ -29,15 +29,25 @@
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-searchString="@ViewData["CurrentFilter"]">Date</a>
             </th>
             <th>Genre</th>
+            <th>Options</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var film in Model)
         {
             <tr>
-                <td>@item.FilmName</td>
-                <td>@item.DateOfRelease?.ToString("yyyy-MM-dd")</td>
-                <td>@item.Genre?.GenreName</td>
+                <td>@film.FilmName</td>
+                <td>@film.DateOfRelease?.ToString("yyyy-MM-dd")</td>
+                <td>@film.Genre?.GenreName</td>
+                <td>
+                    <div class="d-flex gap-1">
+                        <button class="aero"><a asp-controller="Film" asp-action="Edit" asp-route-id="@film.FilmId" >Edit</a></button>
+                        <form class="form-inline" asp-controller="Film" asp-action="Delete" asp-route-id="@film.FilmId" method="post">
+                            @Html.AntiForgeryToken()
+                            <button class="aero danger" type="submit">Delete</button>
+                        </form>
+                </div>
+                </td>
             </tr>
         }
     </tbody>
