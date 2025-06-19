@@ -1,38 +1,53 @@
+@model IEnumerable<FilmStudioManager.Models.Employee>
 @{
     ViewData["Title"] = "All Employees";
 }
 
-<div class="col-md-12 d-flex align-items-center">
+<div class="col-md-12 d-flex align-items-center mb-3">
     <h1 class="header-row">Employees</h1>
-    <a class="btn btn-primary ms-auto" asp-action="Create">Add Employee</a>
+    <a class="btn btn-primary ms-auto aero primary" asp-action="Create">Add Employee</a>
 </div>
 
-<table class="table table-bordered mt-3 table-striped  ">
+<table id="employeeTable" class="table table-bordered table-striped">
     <thead>
-        <th>ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Role</th>
-        <th>Options</th>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Role</th>
+            <th>Options</th>
+        </tr>
     </thead>
     <tbody>
-    @foreach(var emp in Model)
-    {
-        <tr>
-            <td>@emp.EmployeeId</td>
-            <td>@emp.FirstName</td>
-            <td>@emp.LastName</td>
-            <td>@emp.Role</td>
-            <td class="text-nowrap">
-                <div class="d-flex gap-1">
-                    <a class="btn btn-info" asp-controller="Employee" asp-action="Edit" asp-route-id="@emp.EmployeeId" >Edit</a>
-                    <form class="form-inline" asp-controller="Employee" asp-action="Delete" asp-route-id="@emp.EmployeeId" method="post">
-                        @Html.AntiForgeryToken()
-                        <input class="btn btn-danger" type="submit" value="Delete">
-                    </form>
-                </div>
-            </td>
-        </tr>
-    }
+        @foreach (var emp in Model)
+        {
+            <tr>
+                <td>@emp.FirstName</td>
+                <td>@emp.LastName</td>
+                <td>@emp.Role</td>
+                <td class="text-nowrap">
+                    <div class="d-flex gap-1">
+                        <a class="btn-sm aero primary" asp-controller="Employee" asp-action="Edit" asp-route-id="@emp.EmployeeId">Edit</a>
+                        <form asp-controller="Employee" asp-action="Delete" asp-route-id="@emp.EmployeeId" method="post" onsubmit="return confirm('Are you sure?');">
+                            @Html.AntiForgeryToken()
+                            <button class="aero danger" type="submit">Delete</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
+
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            console.log("✅ DataTables initialized");
+            $('#employeeTable').DataTable();
+        });
+    </script>
+}

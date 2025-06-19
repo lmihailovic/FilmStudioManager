@@ -1,0 +1,64 @@
+<h2>Employees (AJAX)</h2>
+
+<table class="table" id="empTable">
+    <thead>
+        <tr><th>Name</th><th>Role</th><th>Action</th></tr>
+    </thead>
+    <tbody id="empBody"></tbody>
+</table>
+
+<input type="text" id="firstName" placeholder="First Name" />
+<input type="text" id="lastName" placeholder="Last Name" />
+<input type="text" id="role" placeholder="Role" />
+<button id="createBtn" class="aero primary">Add Employee</button>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function loadEmployees() {
+            $.get("/api/EmployeeApi", function (data) {
+                $("#empBody").empty();
+                data.forEach(e => {
+                    $("#empBody").append(`
+                        <tr>
+                            <td>${e.firstName} ${e.lastName}</td>
+                            <td>${e.role}</td>
+                            <td><button class="aero danger" onclick="deleteEmployee(${e.employeeId})">Delete</button></td>
+                        </tr>
+                    `);
+                });
+            });
+        }
+
+        function deleteEmployee(id) {
+            $.ajax({
+                url: `/api/EmployeeApi/${id}`,
+                type: "DELETE",
+                success: loadEmployees
+            });
+        }
+
+        $("#createBtn").click(function () {
+            const newEmp = {
+                firstName: $("#firstName").val(),
+                lastName: $("#lastName").val(),
+                role: $("#role").val()
+            };
+
+            $.ajax({
+                url: "/api/EmployeeApi",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(newEmp),
+                success: function () {
+                    loadEmployees();
+                    $("#firstName").val("");
+                    $("#lastName").val("");
+                    $("#role").val("");
+                }
+            });
+        });
+
+        $(document).ready(loadEmployees);
+    </script>
+}

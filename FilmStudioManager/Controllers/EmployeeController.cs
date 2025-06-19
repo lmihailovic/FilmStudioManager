@@ -26,6 +26,12 @@ public class EmployeeController : Controller
     }
 
     [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> EmployeeApi()
+    {
+        return View();
+    }
+
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Create()
     {
         return View();

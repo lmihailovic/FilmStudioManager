@@ -26,19 +26,19 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <button class="aero"><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a></button>
+                            <a class="nav-link text-dark aero" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li>
-                            <button class="aero"><a class="nav-link text-dark" asp-area="" asp-controller="Film" asp-action="Index">Films</a></button>
+                            <a class="nav-link text-dark aero" asp-area="" asp-controller="Film" asp-action="Index">Films</a>
                         </li>
                         @{
                             if (!User.Identity.IsAuthenticated)
                             {
                                 <li class="nav-item">
-                                    <button class="aero"><a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a></button>
+                                    <a class="nav-link text-dark aero" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
                                 </li>
                                 <li class="nav-item">
-                                    <button class="aero"><a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a></button>
+                                    <a class="nav-link text-dark aero" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
                                 </li>
                             }
                             else
@@ -46,11 +46,11 @@
                                 if(User.IsInRole("Admin"))
                                 {
                                     <li class="nav-item">
-                                        <button class="aero primary"> <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a></button>
+                                        <a class="nav-link text-dark aero primary" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
                                     </li>
                                 }
                                 <li class="nav-item">
-                                    <button class="aero danger"><a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></button>
+                                    <a class="nav-link text-dark aero danger" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
                                 </li>
                             }
                         }
