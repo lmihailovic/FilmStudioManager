@@ -1,0 +1,20 @@
+.elementDisplay
+{
+    padding: 2em;
+
+    display: flex;
+    gap: 2em;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.element
+{
+    padding: 1em;
+    width: 30%;
+    
+    outline: 1px solid black;
+
+    display: flex;
+    flex-direction: column;
+}

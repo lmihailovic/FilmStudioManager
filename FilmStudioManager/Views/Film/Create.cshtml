@@ -9,21 +9,21 @@
     @Html.AntiForgeryToken()
 
     <div class="form-group">
-        <label asp-for="FilmName"></label>
+        <label asp-for="FilmName">Name</label>
         <input asp-for="FilmName" class="form-control" />
         <span asp-validation-for="FilmName" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="IDGenre">Genre</label>
-        <select asp-for="IDGenre" class="form-control" asp-items="@(ViewData["IDGenre"] as SelectList)">
+        <label asp-for="GenreId">Genre</label>
+        <select asp-for="GenreId" class="form-control" asp-items="@(ViewData["GenreId"] as SelectList)">
             <option value="">-- Select Genre --</option>
         </select>
-        <span asp-validation-for="IDGenre" class="text-danger"></span>
+        <span asp-validation-for="GenreId" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="DateOfRelease"></label>
+        <label asp-for="DateOfRelease">Date of Release</label>
         <input asp-for="DateOfRelease" class="form-control" type="date" />
         <span asp-validation-for="DateOfRelease" class="text-danger"></span>
     </div>

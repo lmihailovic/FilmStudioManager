@@ -24,13 +24,13 @@ public class FilmController : Controller
 
     public IActionResult Create()
     {
-        ViewData["IDGenre"] = new SelectList(_context.Genres, "ID", "GenreName");
+        ViewData["GenreId"] = new SelectList(_context.Genres, "GenreId", "GenreName");
         return View();
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("FilmName,IDGenre,DateOfRelease")] Film film)
+    public async Task<IActionResult> Create(Film film)
     {
         if (ModelState.IsValid)
         {
@@ -38,8 +38,8 @@ public class FilmController : Controller
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
-        ViewData["IDGenre"] = new SelectList(_context.Genres, "ID", "GenreName", film.IDGenre);
+        
+        ViewData["GenreId"] = new SelectList(_context.Genres, "GenreId", "GenreName", film.GenreId);
         return View(film);
     }
 }
