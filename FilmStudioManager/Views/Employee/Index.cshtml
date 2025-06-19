@@ -1,0 +1,38 @@
+@{
+    ViewData["Title"] = "All Employees";
+}
+
+<div class="col-md-12 d-flex align-items-center">
+    <h1 class="header-row">Employees</h1>
+    <a class="btn btn-primary ms-auto" asp-action="Create">Add Employee</a>
+</div>
+
+<table class="table table-bordered mt-3 table-striped  ">
+    <thead>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Role</th>
+        <th>Options</th>
+    </thead>
+    <tbody>
+    @foreach(var emp in Model)
+    {
+        <tr>
+            <td>@emp.EmployeeId</td>
+            <td>@emp.FirstName</td>
+            <td>@emp.LastName</td>
+            <td>@emp.Role</td>
+            <td class="text-nowrap">
+                <div class="d-flex gap-1">
+                    <a class="btn btn-info" asp-controller="Employee" asp-action="Edit" asp-route-id="@emp.EmployeeId" >Edit</a>
+                    <form class="form-inline" asp-controller="Employee" asp-action="Delete" asp-route-id="@emp.EmployeeId" method="post">
+                        @Html.AntiForgeryToken()
+                        <input class="btn btn-danger" type="submit" value="Delete">
+                    </form>
+                </div>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
