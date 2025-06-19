@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using FilmStudioManager.Helpers;
 
 public class FilmController : Controller
 {
@@ -16,11 +17,36 @@ public class FilmController : Controller
         _context = context;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string sortOrder, string searchString, int pageNumber = 1)
     {
-        var films = await _context.Films.Include(f => f.Genre).ToListAsync();
+        int pageSize = 5;
 
-        return View(films);
+        ViewData["CurrentSort"] = sortOrder;
+        ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+        ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+        ViewData["CurrentFilter"] = searchString;
+
+        var films = from f in _context.Films.Include(f => f.Genre)
+                    select f;
+
+        // Search filter
+        if (!String.IsNullOrEmpty(searchString))
+        {
+            films = films.Where(f => f.FilmName.Contains(searchString));
+        }
+
+        // Sorting
+        films = sortOrder switch
+        {
+            "name_desc" => films.OrderByDescending(f => f.FilmName),
+            "Date" => films.OrderBy(f => f.DateOfRelease),
+            "date_desc" => films.OrderByDescending(f => f.DateOfRelease),
+            _ => films.OrderBy(f => f.FilmName),
+        };
+
+        var pagedList = await PaginatedList<Film>.CreateAsync(films.AsNoTracking(), pageNumber, pageSize);
+
+        return View(pagedList);
     }
 
     [Authorize]

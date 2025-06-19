@@ -1,3 +1,5 @@
+@using FilmStudioManager.Helpers
+@model PaginatedList<FilmStudioManager.Models.Film>
 @{
     ViewData["Title"] = "All Films";
 }
@@ -10,7 +12,54 @@
     }
 </div>
 
-    <div class="elementDisplay">
+<form asp-action="Index" method="get">
+    <p>
+        Search: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+        <button type="submit" class="aero">Search</button>
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-searchString="@ViewData["CurrentFilter"]">Name</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-searchString="@ViewData["CurrentFilter"]">Date</a>
+            </th>
+            <th>Genre</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FilmName</td>
+                <td>@item.DateOfRelease?.ToString("yyyy-MM-dd")</td>
+                <td>@item.Genre?.GenreName</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div class="text-center">
+    @if (Model.HasPreviousPage)
+    {
+        <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)" asp-route-sortOrder="@ViewData["CurrentSort"]" asp-route-searchString="@ViewData["CurrentFilter"]">Previous</a>
+    }
+
+    Page @Model.PageIndex of @Model.TotalPages
+
+    @if (Model.HasNextPage)
+    {
+        <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)" asp-route-sortOrder="@ViewData["CurrentSort"]" asp-route-searchString="@ViewData["CurrentFilter"]">Next</a>
+    }
+</div>
+
+
+    @* <div class="elementDisplay">
     @foreach(var film in Model)
     {
         <div class="element glass-card">
@@ -33,5 +82,4 @@
                 </div>
             }
         </div>
-    }
-</div>
+    } *@
