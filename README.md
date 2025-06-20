@@ -4,8 +4,9 @@ Web based management app for working with employees and projects.
 
 ## Requirements
 
-- `docker compose` for the database
-- LINUX SPECIFIC: `~/.dotnet/tools` in your `$PATH`
+- `docker compose`
+> [!CAUTION]
+> Linux users should have `~/.dotnet/tools` in their `$PATH`
 
 ## Getting started
 
