@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FilmStudioManager")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8716935bfc818c2b97d223b709786dd14a709138")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0227d1df2cc415522f0326f4e2d147fc33853a5b")]
 [assembly: System.Reflection.AssemblyProductAttribute("FilmStudioManager")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FilmStudioManager")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
