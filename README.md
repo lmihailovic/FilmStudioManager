@@ -13,8 +13,17 @@ Web based management app for working with employees and projects.
 
 ## Getting started
 
-1. Clone the repository `git clone https://github.com/lmihailovic/FilmStudioManager`
-2. Enter the repository `cd FilmStudioManager`
-3. Start the database container `docker-compose up -d`
-4. Apply the migrations `dotnet ef database update`
-5. Start the project `dotnet run`
+Clone and enter the repository
+```
+git clone https://github.com/lmihailovic/FilmStudioManager
+&& cd FilmStudioManager
+```
+Start the database container
+```
+docker-compose up -d
+```
+Apply the migrations and start the project
+```
+dotnet ef database update
+&& dotnet run
+```
