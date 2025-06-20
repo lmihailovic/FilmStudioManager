@@ -2,6 +2,9 @@
 
 Web based management app for working with employees and projects.
 
+![image](https://github.com/user-attachments/assets/7fa9acd3-013f-4d50-b3c9-cd20e83311a9)
+
+
 ## Requirements
 
 - `docker compose`
